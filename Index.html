@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KICKSTART 2026 | Strategic Coaching</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@700;900&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        paper: '#F9F9F8',
+                        charcoal: '#2C2C2C',
+                        'safety-orange': '#FF4D00',
+                        'signal-green': '#00CC66',
+                        'border-grey': '#E5E5E5',
+                    },
+                    fontFamily: {
+                        heading: ['Outfit', 'sans-serif'],
+                        body: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    animation: {
+                        'marquee': 'marquee 25s linear infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #F9F9F8; color: #2C2C2C; overflow-x: hidden; }
+        .bg-grid-paper {
+            background-image: linear-gradient(#E5E5E5 1px, transparent 1px), linear-gradient(90deg, #E5E5E5 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .noise-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+        .btn-brutal { transition: all 0.1s ease; position: relative; }
+        .btn-brutal:hover { transform: translate(-4px, -4px); box-shadow: 4px 4px 0px #2C2C2C; }
+        
+        /* THE MAGIC BLEND MODE FOR THE PHOTO */
+        .multiply-blend { 
+            mix-blend-mode: multiply; 
+            filter: grayscale(100%) contrast(115%) brightness(1.05); 
+        }
+        
+        ::selection { background: #FF4D00; color: white; }
+        html { scroll-behavior: smooth; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-grid-paper font-body antialiased selection:bg-safety-orange selection:text-white relative pb-20 md:pb-0">
+
+    <div class="noise-overlay"></div>
+
+    <!-- STICKY CONVERSION BAR -->
+    <div class="fixed bottom-0 left-0 w-full bg-charcoal text-white border-t-2 border-safety-orange z-50 md:top-0 md:bottom-auto md:border-t-0 md:border-b-2 flex justify-between items-center px-4 py-3 shadow-2xl">
+        <div class="font-mono text-xs hidden md:flex items-center gap-4">
+             <span class="text-safety-orange animate-pulse">●</span> LIVE PROTOCOL
+             <span class="text-gray-400">|</span>
+             <span>SPOTS REMAINING: 08</span>
+        </div>
+        <div class="flex items-center justify-between w-full md:w-auto gap-4">
+            <span class="font-heading font-bold text-sm md:hidden">KICKSTART 2026</span>
+            <a href="#pricing" class="bg-safety-orange text-white font-mono uppercase px-4 py-2 text-xs font-bold tracking-wider hover:bg-white hover:text-charcoal transition-colors">
+                [ SECURE SPOT ]
+            </a>
+        </div>
+    </div>
+
+    <main class="max-w-7xl mx-auto border-l border-r border-border-grey bg-paper/90 relative z-10 md:mt-12">
+
+        <!-- Header -->
+        <header class="border-b border-border-grey p-4 flex justify-between items-center bg-paper">
+            <div class="font-mono text-xs tracking-widest text-charcoal">
+                SYSTEM: ONLINE
+            </div>
+            <!-- Real Countdown -->
+            <div class="font-mono text-xs tracking-widest text-charcoal" x-data="{ 
+                days: '00', hours: '00', 
+                init() {
+                    const target = new Date('2026-01-10T10:00:00');
+                    setInterval(() => {
+                        const now = new Date();
+                        const diff = target - now;
+                        if(diff > 0) {
+                            this.days = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                            this.hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                        }
+                    }, 1000);
+                }
+            }" x-init="init()">
+                T-MINUS: <span x-text="days">11</span>D <span x-text="hours">04</span>H
+            </div>
+        </header>
+
+        <!-- HERO -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 border-b border-border-grey min-h-[60vh]">
+            <div class="lg:col-span-8 p-8 md:p-16 border-b lg:border-b-0 lg:border-r border-border-grey flex flex-col justify-center">
+                <div class="font-mono text-safety-orange mb-6 border border-safety-orange inline-block px-2 py-1 text-xs w-max">
+                    SYSTEM: INITIALIZING... 2026 PROTOCOL
+                </div>
+                <h1 class="font-heading font-black text-5xl md:text-7xl lg:text-8xl leading-[0.9] tracking-tight mb-6 text-charcoal">
+                    THE YEAR IS WON IN THE <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-safety-orange to-red-600">FIRST 90 DAYS.</span>
+                </h1>
+                <p class="font-body text-lg md:text-xl text-charcoal/80 max-w-2xl leading-relaxed mb-8">
+                    Most 2026 resolutions will fail by February 15th. Don’t just depend on willpower; build a solid strategy instead.
+                </p>
+                
+                <div class="flex items-center gap-3 opacity-60">
+                    <div class="w-6 h-10 border border-charcoal rounded-full flex justify-center p-1">
+                        <div class="w-1 h-2 bg-charcoal rounded-full animate-bounce mt-1"></div>
+                    </div>
+                    <span class="font-mono text-xs tracking-widest">SCROLL_TO_INITIATE</span>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-4 bg-charcoal text-paper p-8 flex flex-col justify-between relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-2 font-mono text-xs opacity-30">REF: 90-MIN_SPRINT</div>
+                <div class="mt-auto relative z-10">
+                    <p class="font-body text-base leading-relaxed mb-4">
+                        2026 is more than just another year. Start January with a plan and carry that momentum into the rest of the year. 
+                    </p>
+                    <p class="font-body text-base leading-relaxed">
+                        Identify areas of focus, craft a vision, and turn this into an action plan for the first 90 days.
+                    </p>
+                </div>
+                <div class="absolute -top-10 -left-10 w-40 h-40 border border-white/20 rounded-full"></div>
+            </div>
+        </section>
+
+        <!-- KINETIC MARQUEE -->
+        <div class="border-b border-border-grey bg-safety-orange text-white overflow-hidden py-3">
+            <div class="whitespace-nowrap animate-marquee font-mono font-bold text-sm tracking-widest">
+                STRATEGY OVER WILLPOWER /// BUILD YOUR ANCHOR /// 90 DAY SPRINT /// SYSTEM DIAGNOSIS /// DESIGN YOUR 2026 /// STRATEGY OVER WILLPOWER /// BUILD YOUR ANCHOR /// 90 DAY SPRINT
+            </div>
+        </div>
+
+        <!-- PROBLEM SECTION -->
+        <section class="border-b border-border-grey">
+            <div class="p-8 border-b border-border-grey">
+                <h2 class="font-heading font-bold text-4xl text-charcoal uppercase tracking-tight">Why "Resolutions" Fail</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3">
+                <div class="p-8 border-b md:border-b-0 border-r border-border-grey hover:bg-white transition-colors group">
+                    <div class="font-mono text-xs text-charcoal/50 mb-4 group-hover:text-safety-orange">ERROR_01</div>
+                    <h3 class="font-heading font-bold text-2xl mb-3">The Drift</h3>
+                    <p class="text-charcoal/80 leading-relaxed">You begin with energy, but life interrupts. By the fourth week, your plan is forgotten.</p>
+                </div>
+                <div class="p-8 border-b md:border-b-0 border-r border-border-grey hover:bg-white transition-colors group">
+                    <div class="font-mono text-xs text-charcoal/50 mb-4 group-hover:text-safety-orange">ERROR_02</div>
+                    <h3 class="font-heading font-bold text-2xl mb-3">The Overwhelm</h3>
+                    <p class="text-charcoal/80 leading-relaxed">You try to change everything at once, get burned out, and end up changing nothing.</p>
+                </div>
+                <div class="p-8 hover:bg-white transition-colors group">
+                    <div class="font-mono text-xs text-charcoal/50 mb-4 group-hover:text-safety-orange">ERROR_03</div>
+                    <h3 class="font-heading font-bold text-2xl mb-3">The Isolation</h3>
+                    <p class="text-charcoal/80 leading-relaxed">You try to do it all alone, without anyone to keep you accountable.</p>
+                </div>
+            </div>
+            <div class="p-6 bg-charcoal text-paper text-center font-mono uppercase text-sm tracking-widest border-t border-charcoal">
+                <span class="text-signal-green">>>> THE SOLUTION:</span> You don’t need more motivation. What you need is a clear system.
+            </div>
+        </section>
+
+        <!-- METHODOLOGY -->
+        <section class="border-b border-border-grey">
+            <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[500px]">
+                <div class="lg:col-span-4 p-8 border-b lg:border-b-0 lg:border-r border-border-grey bg-white">
+                    <h2 class="font-heading font-black text-5xl mb-6">THE 90-MINUTE AGENDA</h2>
+                    <p class="font-body text-lg text-charcoal/80 mb-6">
+                        We only have 90 minutes. This fast-paced workshop moves you from confusion to clarity.
+                    </p>
+                    <div class="w-16 h-1 bg-safety-orange"></div>
+                </div>
+                <div class="lg:col-span-8 grid grid-rows-3">
+                    <div class="group border-b border-border-grey p-8 flex flex-col md:flex-row gap-6 hover:bg-white transition-colors">
+                        <div class="font-mono font-bold text-safety-orange border border-safety-orange px-2 py-1 text-sm bg-safety-orange/5 h-max">PHASE_01</div>
+                        <div>
+                            <h3 class="font-heading font-bold text-2xl mb-1 group-hover:text-safety-orange transition-colors">DIAGNOSIS</h3>
+                            <p class="text-sm md:text-base text-charcoal/80">Identify exactly where to aim your focus.</p>
+                        </div>
+                    </div>
+                    <div class="group border-b border-border-grey p-8 flex flex-col md:flex-row gap-6 hover:bg-white transition-colors">
+                        <div class="font-mono font-bold text-safety-orange border border-safety-orange px-2 py-1 text-sm bg-safety-orange/5 h-max">PHASE_02</div>
+                        <div>
+                            <h3 class="font-heading font-bold text-2xl mb-1 group-hover:text-safety-orange transition-colors">DESIGN</h3>
+                            <p class="text-sm md:text-base text-charcoal/80">Build your Action Anchor. Train your brain’s RAS to spot opportunities.</p>
+                        </div>
+                    </div>
+                    <div class="group p-8 flex flex-col md:flex-row gap-6 hover:bg-white transition-colors">
+                        <div class="font-mono font-bold text-signal-green border border-signal-green px-2 py-1 text-sm bg-signal-green/5 h-max">PHASE_03</div>
+                        <div>
+                            <h3 class="font-heading font-bold text-2xl mb-1 group-hover:text-signal-green transition-colors">ACTION</h3>
+                            <p class="text-sm md:text-base text-charcoal/80">Turn vision into a clear, tactical 90-Day Sprint Plan.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DATA STREAM: SOCIAL PROOF -->
+        <section class="border-b border-border-grey bg-gray-50">
+             <div class="p-4 border-b border-border-grey flex justify-between items-center bg-white">
+                 <div class="font-mono text-xs text-charcoal/50 flex items-center gap-2">
+                     <div class="w-2 h-2 rounded-full bg-signal-green animate-pulse"></div>
+                     SYSTEM_LOGS // USER_FEEDBACK
+                 </div>
+                 <div class="font-mono text-xs text-charcoal/40 hidden md:block">SWIPE >></div>
+             </div>
+             
+             <div class="flex overflow-x-auto snap-x snap-mandatory divide-x divide-border-grey scrollbar-hide">
+                 <!-- Card 1 -->
+                 <div class="min-w-[85vw] md:min-w-[400px] p-8 snap-center flex flex-col justify-between bg-paper hover:bg-white transition-colors">
+                     <p class="font-body text-sm text-charcoal/80 mb-6 leading-relaxed">
+                        "Tristan’s coaching helped me improve my presentation skills, conflict resolution, and overall confidence. His patience and knowledge in guiding me through meetings were invaluable."
+                     </p>
+                     <div class="border-t border-border-grey pt-4 mt-auto">
+                        <div class="font-mono text-xs text-safety-orange mb-1">>> UNIT: SAM</div>
+                        <div class="font-heading font-bold text-sm">DATA ANALYST</div>
+                     </div>
+                 </div>
+                 <!-- Card 2 -->
+                 <div class="min-w-[85vw] md:min-w-[400px] p-8 snap-center flex flex-col justify-between bg-paper hover:bg-white transition-colors">
+                     <p class="font-body text-sm text-charcoal/80 mb-6 leading-relaxed">
+                        "Tristan was instrumental in driving our bid for a social housing project. His leadership in coordinating stakeholders ensured timely completion. His integrity, passion, and vulnerability deeply impacted the project’s success."
+                     </p>
+                     <div class="border-t border-border-grey pt-4 mt-auto">
+                        <div class="font-mono text-xs text-safety-orange mb-1">>> UNIT: GARY</div>
+                        <div class="font-heading font-bold text-sm">HOUSING NPO SECRETARY</div>
+                     </div>
+                 </div>
+                 <!-- Card 3 -->
+                 <div class="min-w-[85vw] md:min-w-[400px] p-8 snap-center flex flex-col justify-between bg-paper hover:bg-white transition-colors">
+                     <p class="font-body text-sm text-charcoal/80 mb-6 leading-relaxed">
+                        "He taught me to navigate the corporate landscape strategically and to invest in myself. Tristan’s dedication to creating inclusive spaces and fostering leadership development has had a lasting impact on my career."
+                     </p>
+                     <div class="border-t border-border-grey pt-4 mt-auto">
+                        <div class="font-mono text-xs text-safety-orange mb-1">>> UNIT: ANJOLA</div>
+                        <div class="font-heading font-bold text-sm">LEARNING PRODUCT MANAGER</div>
+                     </div>
+                 </div>
+                 <!-- Card 4 -->
+                 <div class="min-w-[85vw] md:min-w-[400px] p-8 snap-center flex flex-col justify-between bg-paper hover:bg-white transition-colors">
+                     <p class="font-body text-sm text-charcoal/80 mb-6 leading-relaxed">
+                        "Supported our function by creating visual insights that drove strategic decisions. His guidance helped me manage tasks effectively and build strong relationships with senior leadership."
+                     </p>
+                     <div class="border-t border-border-grey pt-4 mt-auto">
+                        <div class="font-mono text-xs text-safety-orange mb-1">>> UNIT: PRASANTHIE</div>
+                        <div class="font-heading font-bold text-sm">FINANCE BUSINESS PARTNER</div>
+                     </div>
+                 </div>
+                 <!-- Card 5 -->
+                 <div class="min-w-[85vw] md:min-w-[400px] p-8 snap-center flex flex-col justify-between bg-paper hover:bg-white transition-colors">
+                     <p class="font-body text-sm text-charcoal/80 mb-6 leading-relaxed">
+                        "Tristan emphasised the importance of including more women’s voices. This empowered me to take ownership and engage deeply, boosting my confidence and ability to present the idea compellingly to others."
+                     </p>
+                     <div class="border-t border-border-grey pt-4 mt-auto">
+                        <div class="font-mono text-xs text-safety-orange mb-1">>> UNIT: LEIGH</div>
+                        <div class="font-heading font-bold text-sm">OPERATIONS MANAGER</div>
+                     </div>
+                 </div>
+             </div>
+        </section>
+
+        <!-- PRICING -->
+        <section id="pricing" class="border-b border-border-grey bg-paper">
+            <div class="p-8 border-b border-border-grey text-center">
+                <h2 class="font-heading font-black text-4xl md:text-5xl uppercase">Select Your Protocol</h2>
+                <p class="font-mono text-xs mt-2 text-charcoal/60">SYSTEM STATUS: BOOKINGS OPEN</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3">
+                <!-- Option 1: Webinar -->
+                <div class="p-8 border-b md:border-b-0 border-r border-border-grey flex flex-col group relative">
+                    <div class="absolute top-4 right-4 w-3 h-3 border border-charcoal"></div>
+                    <h3 class="font-heading font-bold text-2xl mb-2">WEBINAR</h3>
+                    <div class="font-mono text-xs bg-gray-200 inline-block px-2 py-1 mb-6 w-max">TYPE: LIVE_VIRTUAL</div>
+                    <ul class="font-mono text-sm space-y-4 mb-8 flex-grow">
+                        <li class="flex items-start">
+                            <span class="text-safety-orange mr-2">></span> 
+                            <div>
+                                <span class="font-bold text-charcoal">DATE:</span> 10 Jan 2026<br>
+                                <span class="text-xs text-charcoal/70">10:00am – 11:30am SAST</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-safety-orange mr-2">></span>
+                            <div>
+                                <span class="font-bold text-charcoal">BEST FOR:</span><br>
+                                <span class="text-charcoal/80 leading-tight">Individuals who want to carve out specific time to develop a plan for 2026.</span>
+                            </div>
+                        </li>
+                        <li class="border-t border-dashed border-gray-300 pt-3 w-full">
+                            <div class="flex flex-col">
+                                <span class="text-xs text-charcoal/50 mb-1">SA RESIDENTS</span>
+                                <span class="font-heading font-black text-4xl text-charcoal">R200</span>
+                                <span class="text-xs font-mono text-charcoal/60 mt-2 block border-l-2 border-safety-orange pl-2">INTL: $50 USD</span>
+                            </div>
+                        </li>
+                    </ul>
+                    <a href="https://form.jotform.com/253631744425053" target="_blank" class="btn-brutal w-full block text-center bg-charcoal text-white font-mono uppercase py-3 border-2 border-charcoal text-xs font-bold tracking-wider hover:bg-safety-orange hover:border-safety-orange">
+                        [ Register Interest ]
+                    </a>
+                </div>
+
+                <!-- Option 2: Bespoke Group -->
+                <div class="p-8 border-b md:border-b-0 border-r border-border-grey flex flex-col group relative">
+                    <div class="absolute top-4 right-4 w-3 h-3 border border-charcoal bg-charcoal"></div>
+                    <h3 class="font-heading font-bold text-2xl mb-2">BESPOKE GROUP</h3>
+                    <div class="font-mono text-xs bg-gray-200 inline-block px-2 py-1 mb-6 w-max">TYPE: SMALL_GROUP</div>
+                    <ul class="font-mono text-sm space-y-4 mb-8 flex-grow">
+                        <li class="flex items-start">
+                            <span class="text-safety-orange mr-2">></span>
+                            <div>
+                                <span class="font-bold text-charcoal">DATE:</span><br>
+                                <span class="text-charcoal/80">Scheduling determined by your availability.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-safety-orange mr-2">></span>
+                            <div>
+                                <span class="font-bold text-charcoal">BEST FOR:</span><br>
+                                <span class="text-charcoal/80 leading-tight">Friends, colleagues, or teams who want to hold each other accountable.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-safety-orange mr-2">></span>
+                            <div>
+                                <span class="font-bold text-charcoal">NOTE:</span><br>
+                                <span class="text-charcoal/80 leading-tight">Available online or in-person.<br><span class="text-xs text-charcoal/60 italic">*In-person sessions incur additional travel fee based on location.</span></span>
+                            </div>
+                        </li>
+                        <li class="border-t border-dashed border-gray-300 pt-3 w-full">
+                            <div class="flex flex-col">
+                                <span class="text-xs text-charcoal/50 mb-1">SA RESIDENTS (FLAT FEE UP TO 10)</span>
+                                <span class="font-heading font-black text-4xl text-charcoal">R2,500</span>
+                                <span class="text-xs font-mono text-charcoal/60 mt-2 block border-l-2 border-safety-orange pl-2">INTL: $300 USD</span>
+                            </div>
+                        </li>
+                    </ul>
+                    <a href="https://form.jotform.com/253631744425053" target="_blank" class="btn-brutal w-full block text-center bg-white text-charcoal font-mono uppercase py-3 border-2 border-charcoal text-xs font-bold tracking-wider hover:bg-charcoal hover:text-white">
+                        [ Register Group ]
+                    </a>
+                </div>
+
+                <!-- Option 3: One-on-One -->
+                <div class="p-8 flex flex-col group relative bg-charcoal text-white">
+                    <div class="absolute top-4 right-4 w-3 h-3 border border-white bg-signal-green animate-pulse"></div>
+                    <h3 class="font-heading font-bold text-2xl mb-2">ONE-ON-ONE</h3>
+                    <div class="font-mono text-xs bg-charcoal border border-white inline-block px-2 py-1 mb-6 w-max">TYPE: DEEP_DIVE</div>
+                    <ul class="font-mono text-sm space-y-4 mb-8 flex-grow text-gray-300">
+                        <li class="flex items-start">
+                            <span class="text-signal-green mr-2">></span>
+                            <div>
+                                <span class="font-bold text-white">DATE:</span><br>
+                                <span class="text-white/80">Flexible scheduling.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-signal-green mr-2">></span>
+                            <div>
+                                <span class="font-bold text-white">BEST FOR:</span><br>
+                                <span class="text-white/80 leading-tight">Professionals who need a custom strategy and full privacy.</span>
+                            </div>
+                        </li>
+                        <li class="border-t border-dashed border-gray-600 pt-3 w-full">
+                            <div class="flex flex-col">
+                                <span class="text-xs text-white/50 mb-1">SA RESIDENTS (LAUNCH SPECIAL)</span>
+                                <span class="font-heading font-black text-4xl text-white">R1,500</span>
+                                <span class="text-xs font-mono text-white/60 mt-2 block border-l-2 border-signal-green pl-2">INTL: $200 USD</span>
+                            </div>
+                        </li>
+                    </ul>
+                    <a href="https://form.jotform.com/253631744425053" target="_blank" class="btn-brutal w-full block text-center bg-signal-green text-charcoal font-mono uppercase py-3 border-2 border-signal-green text-xs font-bold tracking-wider hover:bg-white hover:text-charcoal hover:border-white">
+                        [ Register 1-on-1 ]
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Follow-up Session Note -->
+            <div class="p-4 bg-gray-100 border-t border-border-grey text-center font-mono text-xs text-charcoal/70">
+                <span class="text-safety-orange font-bold">>> NOTICE:</span> Optional follow-up sessions can be arranged at a discounted rate for anyone attending a session.
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section class="border-b border-border-grey grid grid-cols-1 lg:grid-cols-2">
+            <!-- Image Area with Background -->
+            <div class="relative min-h-[500px] lg:min-h-full overflow-hidden border-b lg:border-b-0 lg:border-r border-border-grey group">
+                
+                <!-- 1. The Professional Texture Background -->
+                <div class="absolute inset-0 bg-cover bg-center grayscale opacity-60"
+                     style="background-image: url('https://images.unsplash.com/photo-1528459801416-a9e53bbf4e05?q=80&w=1000&auto=format&fit=crop');">
+                </div>
+
+                <!-- 2. YOUR PHOTO -->
+                <img 
+                    src="tristan.png" 
+                    alt="Tristan Pringle - Strategic Partner" 
+                    onerror="this.src='https://images.unsplash.com/photo-1531384441138-2736e62e0919?q=80&w=1000&auto=format&fit=crop'"
+                    class="relative z-10 w-full h-full object-cover object-center multiply-blend transition-transform duration-700 group-hover:scale-105"
+                >
+
+                <!-- Label -->
+                <div class="absolute bottom-0 left-0 bg-white p-4 border-t border-r border-charcoal z-20">
+                    <div class="font-heading font-bold text-xl uppercase">Meet Your Strategic Partner</div>
+                    <div class="font-mono text-xs mt-1 text-safety-orange">Tristan Pringle | CA(SA) | Coach</div>
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="p-8 md:p-12 flex flex-col justify-center bg-white">
+                <p class="font-heading text-xl md:text-2xl font-bold mb-6">"I bridge the gap between human potential and hard strategy."</p>
+                <div class="space-y-6 text-charcoal/90 leading-relaxed font-body">
+                    <div>
+                        <strong class="block font-bold text-charcoal mb-1">THE LOGIC MEETS THE MAGIC</strong>
+                        <p>As a CA(SA) with over 10 years of experience, including roles as a fractional CFO, I understand the rigour of financial modelling, forecasting, and execution. I don't just understand "dreams"; I understand the metrics required to make them real. I bring that same analytical precision to your personal and professional planning.</p>
+                    </div>
+                    <div>
+                        <strong class="block font-bold text-charcoal mb-1">THE HUMAN ELEMENT</strong>
+                        <p>My passion lies in unlocking leadership potential. I believe in an Afrocentric approach to growth—emphasizing community and collective responsibility. Whether you are in the social impact sector, a corporate environment, or an emerging leader, I create a space that is inclusive, creative, and safe.</p>
+                    </div>
+                </div>
+                <!-- LINKEDIN LINK -->
+                <a href="https://www.linkedin.com/in/tristanpringle/" target="_blank" class="inline-block mt-8 font-mono text-sm underline hover:text-safety-orange uppercase tracking-wide decoration-safety-orange decoration-2 underline-offset-4">[ Connect with me on LinkedIn ]</a>
+            </div>
+        </section>
+
+        <!-- GUARANTEE & FAQ -->
+        <section class="bg-white border-b border-border-grey" x-data="{ activeAccordion: null }">
+            <div class="grid grid-cols-1 lg:grid-cols-2">
+                <div class="p-8 lg:p-16 border-b lg:border-b-0 lg:border-r border-border-grey flex flex-col justify-center">
+                    <div class="font-mono text-safety-orange mb-4 text-xs tracking-widest">// INSURANCE_POLICY</div>
+                    <h2 class="font-heading font-bold text-3xl md:text-4xl mb-4">Accountability is the Insurance Policy.</h2>
+                    <p class="font-body text-charcoal/80 mb-6">A plan only works if you stick to it. At the end of each session, we’ll start a "Lock-In" Protocol. You’ll choose your Accountability Witness—either a peer or a coach—to make sure your plan doesn’t get forgotten.</p>
+                    <div class="w-full h-px bg-gradient-to-r from-safety-orange to-transparent"></div>
+                </div>
+                <div class="bg-paper">
+                    <div class="font-mono text-xs p-4 border-b border-border-grey text-charcoal/50">SYSTEM_FAQ.LOG</div>
+                    
+                    <!-- FAQ 1 -->
+                    <div class="border-b border-border-grey">
+                        <button @click="activeAccordion = activeAccordion === 1 ? null : 1" class="w-full text-left p-6 flex justify-between items-center hover:bg-white transition-colors">
+                            <span class="font-heading font-bold text-lg">What happens after I register?</span>
+                            <span class="font-mono text-xl" x-text="activeAccordion === 1 ? '-' : '+'"></span>
+                        </button>
+                        <div x-show="activeAccordion === 1" x-collapse class="px-6 pb-6 text-charcoal/80 font-body text-sm">Once you register via the buttons above, I will send you a signup link with payment details to finalize your booking. To secure your spot: A 50% non-refundable deposit is required. The balance is payable before the course starts.</div>
+                    </div>
+
+                    <!-- FAQ 2 -->
+                    <div class="border-b border-border-grey">
+                        <button @click="activeAccordion = activeAccordion === 2 ? null : 2" class="w-full text-left p-6 flex justify-between items-center hover:bg-white transition-colors">
+                            <span class="font-heading font-bold text-lg">Do I need to prepare anything?</span>
+                            <span class="font-mono text-xl" x-text="activeAccordion === 2 ? '-' : '+'"></span>
+                        </button>
+                        <div x-show="activeAccordion === 2" x-collapse class="px-6 pb-6 text-charcoal/80 font-body text-sm">Yes. Please bring a notebook, a pen, and colours/highlighters—anything that helps you think well. Most importantly, bring an open mind.</div>
+                    </div>
+
+                    <!-- FAQ 3 -->
+                    <div class="border-b border-border-grey">
+                        <button @click="activeAccordion = activeAccordion === 3 ? null : 3" class="w-full text-left p-6 flex justify-between items-center hover:bg-white transition-colors">
+                            <span class="font-heading font-bold text-lg">Is this recorded?</span>
+                            <span class="font-mono text-xl" x-text="activeAccordion === 3 ? '-' : '+'"></span>
+                        </button>
+                        <div x-show="activeAccordion === 3" x-collapse class="px-6 pb-6 text-charcoal/80 font-body text-sm">No recordings will be made available. This is a live, participatory experience.</div>
+                    </div>
+
+                    <!-- FAQ 4 (Payment Plan) -->
+                    <div class="border-b border-border-grey">
+                        <button @click="activeAccordion = activeAccordion === 4 ? null : 4" class="w-full text-left p-6 flex justify-between items-center hover:bg-white transition-colors">
+                            <span class="font-heading font-bold text-lg text-safety-orange">Are payment plans available?</span>
+                            <span class="font-mono text-xl" x-text="activeAccordion === 4 ? '-' : '+'"></span>
+                        </button>
+                        <div x-show="activeAccordion === 4" x-collapse class="px-6 pb-6 text-charcoal/80 font-body text-sm">Payment plans are available if you are not able to pay immediately contact me direct to chat about that.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="bg-charcoal text-paper p-8 text-center border-t-4 border-safety-orange">
+            <p class="font-heading font-bold text-xl mb-4">READY TO WIN 2026?</p>
+            
+            <p class="font-mono text-sm mb-8 text-white/70">
+                Got questions? Email me: <br>
+                <a href="mailto:tristanpringlecoach@gmail.com" class="text-white hover:text-safety-orange transition-colors border-b border-white/20 pb-0.5">tristanpringlecoach@gmail.com</a>
+            </p>
+
+            <div class="font-mono text-xs opacity-40">
+                &copy; 2026 TRISTAN PRINGLE CONSULTING. ALL RIGHTS RESERVED.
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Corner Decor -->
+    <div class="fixed top-0 right-0 p-4 pointer-events-none hidden md:block z-40"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M19,1 L10,1 M19,1 L19,10" stroke="#2C2C2C" stroke-width="2" fill="none"/></svg></div>
+    <div class="fixed bottom-0 left-0 p-4 pointer-events-none hidden md:block z-40"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M1,19 L10,19 M1,19 L1,10" stroke="#2C2C2C" stroke-width="2" fill="none"/></svg></div>
+
+</body>
+</html>
